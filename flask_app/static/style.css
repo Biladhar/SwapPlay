@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url(R.jpg);
+    background-size: cover;
+}
+
+.icon {
+    font-size: 64px;
+    color: #007bff;
+    margin: 20px;
+}
+
+.main-title {
+    font-size: 72px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.tagline {
+    font-size: 24px;
+    color: #ddd;
+    margin-bottom: 30px;
+}
+
+.btn-main {
+    font-size: 18px;
+    padding: 10px 30px;
+    margin: 5px;
+}
