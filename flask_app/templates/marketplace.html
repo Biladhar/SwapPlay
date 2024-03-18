@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='css/style_navbar.css' ) }}">
+        <link rel="stylesheet" href="{{ url_for ('static', filename='css/markeplace.css' ) }}">
+
+    <title>MarketPlace</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-light navbar-light ">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+    
+                <!-- Navbar brand -->
+                <img class="navbar-brand" src="/static/images/logo2.png" alt=""></a>
+    
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+    
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    
+                        <!-- Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">My Profile</a>
+                        </li>
+    
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Marketplace</a>
+                        </li>
+    
+                    </ul>
+    
+                    <!-- Icons -->
+                    <ul class="navbar-nav d-flex flex-row align-items-center">
+                        <li class="nav-item me-3 me-lg-0">
+                            <img class="imgNav" src="{{ url_for('static', filename='images/notification.png') }}">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
+    
+                </div>
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
+            <div class="container-fluid">
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Game" aria-label="Search">
+    
+                    </form>
+                    <div class="dropdown ms-4">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Platform
+                        </button>
+    
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">PlayStation</a></li>
+                            <li><a class="dropdown-item" href="#">Xbox</a></li>
+                            <li><a class="dropdown-item" href="#">PC</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown ms-4">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            State of Play
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Used</a></li>
+                            <li><a class="dropdown-item" href="#">Barely Used</a></li>
+                            <li><a class="dropdown-item" href="#">New</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Game</th>
+                <th scope="col">Platform</th>
+                <th scope="col">State of Product</th>
+                <th scope="col">Swapper</th>
+                <th scope="col">Score</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> <img class="img_game" src="/static/images/forza.webp" alt=""> Game 1</td>
+                <td class="align-middle" >PlayStation</td>
+                <td class="align-middle" >Used</td>
+                <td class="align-middle" >User 1</td>
+                <td class="align-middle" >76</td>
+                <td class="align-middle" ><button class="btn btn-outline-success">Make offer</button></td>
+            </tr>
+            <tr>
+                <td>Game 1</td>
+                <td class="align-middle" >Xbox</td>
+                <td class="align-middle" >Barely Used</td>
+                <td class="align-middle" >User 2</td>
+                <td class="align-middle" >87</td>
+                <td class="align-middle" ><button class="btn btn-outline-success">Make offer</button></td>
+            </tr>
+            <tr>
+                <td>Game 1</td>
+                <td class="align-middle" >PC</td>
+                <td class="align-middle" >New</td>
+                <td class="align-middle" >User 3</td>
+                <td class="align-middle" >100</td>
+                <td class="align-middle" ><button class="btn btn-outline-success">Make offer</button></td>
+            </tr>
+            <tr>
+                <td>Game 1</td>
+                <td class="align-middle" >PlayStation</td>
+                <td>Used</td>
+                <td class="align-middle" >User 4</td>
+                <td>56</td>
+                <td class="align-middle" ><button class="btn btn-outline-success">Make offer</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
