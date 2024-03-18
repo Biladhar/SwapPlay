@@ -1,0 +1,18 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url('/static/images/background2.png');
+    background-size: cover;
+}
+
+
+
+.user_img{
+    height: 21vh;
+    width: 11vw;
+}

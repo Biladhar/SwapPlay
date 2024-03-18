@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-image: url(R.jpg);
+    background-image: url('/static/images/D.png');
     background-size: cover;
 }
 

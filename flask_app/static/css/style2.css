@@ -1,23 +1,30 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+
 body {
     font-family: Arial, sans-serif;
+    overflow-y: inherit;
 
 }
 
 .sidebar {
     background-color: #f7f7f7;
-    padding: 20px;
+
     border-right: 1px solid #ddd;
 }
 
 .branding {
     text-align: center;
-    margin-bottom: 30px;
+
 }
 
 .branding h2 {
     font-size: 2.5rem;
     color: #333;
-    margin-bottom: 10px;
+
 }
 
 .branding p {
@@ -26,7 +33,7 @@ body {
 }
 
 .icon {
-    margin: 20px;
+
     font-size: 64px;
     color: #1aafb9;
 }
@@ -45,6 +52,6 @@ i :hover {
 .tagline {
     font-size: 24px;
     color: rgb(17, 43, 41);
-    margin-bottom: 30px;
+
     margin-left: 70px;
 }

@@ -8,7 +8,7 @@ EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$")
 
 
 class User:
-    def __init__(self, data) -> None:
+    def __init__(self, data):
         self.id = data["id"]
         self.full_name = data["full_name"]
         self.username = data["username"]
