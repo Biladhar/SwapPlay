@@ -56,6 +56,16 @@ class User:
         if len(result) < 1:
             return False
         return User(result[0])
+    
+    @classmethod
+    def edit(cls,data):
+        query="""
+                UPDATE users
+                SET full_name=%(full_name)s, username=%(username)s, email= %(email)s, password=%(password)s,birthday=%(birthday)s,phone_number=%(phone_number)s
+                WHERE id= %(id)s;
+                """
+        return connectToMySQL(DATABASE).query_db(query,data)
+
 
     @staticmethod
     def validate_user(data):

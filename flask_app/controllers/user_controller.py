@@ -46,6 +46,8 @@ def process_register():
     return redirect("/dashboard")
 
 
+
+
 #! ACTION ROUTE
 # === Login ===
 @app.route("/login", methods=["POST"])
@@ -71,6 +73,27 @@ def process_login():
     session["user_id"] = user_in_db.id
     return redirect("/dashboard")
 
+@app.route("/users/edit/<int:id>")
+def edit_one(id):
+    if "user_id" not in session:
+        return redirect ("/")
+    data={
+        "id" : id
+    }
+    user=User.get_by_id(data)
+    return render_template("edit.html",user=user)
+
+@app.route("/edit/<int:id>", methods=["POST"])
+def edit_users(id):
+    pw_hash = bcrypt.generate_password_hash(request.form["password"])
+    print("**********************************",request.form)
+    data={
+        **request.form,
+        "password":pw_hash,
+        "id":id
+    }
+    User.edit(data)
+    return redirect("/dashboard")
 
 # # * View Route
 # @app.route("/dashboard")
