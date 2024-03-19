@@ -21,6 +21,24 @@ class Game:
                 VALUES(%(name)s, %(state)s, %(image)s,%(platform)s,%(user_id)s);
                 """
         return connectToMySQL(DATABASE).query_db(query, data)
+    
+# * get all the game of one user
+    @classmethod
+    def get_one_user_games(cls, data2):
+
+        query = """
+                    SELECT * FROM games
+                    WHERE games.user_id = %(user_id)s;
+                """
+        
+        result = connectToMySQL(DATABASE).query_db(query, data2)
+        no_game = []
+        if len(result) < 1:
+            return no_game
+        return result
+
+        
+
 
 
 

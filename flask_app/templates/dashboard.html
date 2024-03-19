@@ -65,9 +65,12 @@
             <div class="col-sm-4 p-3 ">
                 <div class="h-100 d-inline-block d-flex flex-column justify-content-evenly align-items-center border border-dark">
                     <img class="user_img" src="/static/images/user.jpg" alt="">
-                    <h4>Username</h4>
+                    <h4>{{user.username}}</h4>
                     <h6>number of swap : 002</h6>
                     <a href="">Pending swap</a>
+                    <div class="">
+                        <a href="">Edit Profile</a>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-8 p-3">
@@ -82,22 +85,25 @@
                                 <th>Game</th>
                                 <th>Platform</th>
                                 <th>State</th>
-                                <th>Swap</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {%   for game in user_games   %}
                             <tr>
-                                <td>game 1</td>
-                                <td>Playstation</td>
-                                <td>new</td>
-                                <td>yes</td>
+                                <td class="align-middle d-flex justify-content-start align-items-center ps-5 ">
+                                    <div class="div_image ">
+                                        <img class="game_image" src="../static/images/{{game.image}}" alt="{{game.name}}"> 
+                                    </div>
+                                    <h5 class="text-center" >{{game.name}}</h5>
+                                </td>
+                                <td class="align-middle">{{game.platform}}</td>
+                                <td class="align-middle">{{game.state}}</td>
+                                <td class="align-middle">
+                                    <button class="btn btn-primary" >Edit</button>
+                                    <button class="btn btn btn-danger" type="submit" formaction="/action_page2.php">Delete</button>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>game 1</td>
-                                <td>Playstation</td>
-                                <td>new</td>
-                                <td>yes</td>
-                            </tr>
+                            {%   endfor   %}
                         </tbody>
                     </table>
                 </div>
@@ -113,7 +119,7 @@
                                 <th>Game</th>
                                 <th>Platform</th>
                                 <th>Nr of Offers</th>
-                                <th>Make in offer</th>
+                                <th>Make an offer</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -56,6 +56,8 @@ class User:
         if len(result) < 1:
             return False
         return User(result[0])
+    
+
 
     @staticmethod
     def validate_user(data):

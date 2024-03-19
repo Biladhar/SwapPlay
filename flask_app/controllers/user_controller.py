@@ -2,6 +2,8 @@ from flask_app import app
 from flask import redirect, render_template, request, flash, session
 from flask_bcrypt import Bcrypt
 
+
+from flask_app.models.games import Game
 from flask_app.models.users import User
 
 bcrypt = Bcrypt(app)
@@ -20,9 +22,23 @@ def reg():
 def log():
     return render_template("login.html")
 
+
+
+
+# * dashboard view route
 @app.route("/dashboard")
 def dash():
-    return render_template("dashboard.html")
+    # verify if user is logged
+    if "user_id" not in session:
+        return redirect ("/")
+    # grab the user id from session and put in a dictionary
+    data = {"id": session["user_id"]}
+    # grab the user by id from DB
+    current_user = User.get_by_id(data)
+    # grab the user id from session and put in a dictionary
+    data2 = {"user_id": session["user_id"]}
+    user_games = Game.get_one_user_games(data2)
+    return render_template("dashboard.html", user = current_user, user_games = user_games  )
 
 
 
@@ -33,7 +49,7 @@ def process_register():
 
     # validate the form here ...
     if not User.validate_user(request.form):
-        return redirect("/")
+        return redirect("/registration")
     # create the hash
     print("-------->", request.form["password"])
     pw_hash = bcrypt.generate_password_hash(request.form["password"])
@@ -52,7 +68,7 @@ def process_register():
 def process_login():
 
     if not User.validate_login_user(request.form):
-        return redirect("/")
+        return redirect("/login")
 
     # see if the username provided exists in the database
     data = {"email": request.form["email"]}
