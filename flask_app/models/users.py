@@ -16,6 +16,7 @@ class User:
         self.password = data["password"]
         self.birthday= data["birthday"]
         self.phone_number= data["phone_number"]
+        self.profile_image= data["profile_image"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
     # save user into the DB
@@ -23,8 +24,8 @@ class User:
     def create(cls, data):
 
         query = """
-                INSERT INTO users (full_name, username, email, password,birthday,phone_number)
-                VALUES(%(full_name)s, %(username)s, %(email)s, %(password)s,%(birthday)s,%(phone_number)s);
+                INSERT INTO users (full_name, username, email, password,birthday,phone_number,profile_image)
+                VALUES(%(full_name)s, %(username)s, %(email)s, %(password)s,%(birthday)s,%(phone_number)s,"/static/images/user.jpg");
                 """
 
         return connectToMySQL(DATABASE).query_db(query, data)
@@ -57,15 +58,14 @@ class User:
             return False
         return User(result[0])
     
+    # Add this method to your User class
     @classmethod
-    def edit(cls,data):
-        query="""
-                UPDATE users
-                SET full_name=%(full_name)s, username=%(username)s, email= %(email)s, password=%(password)s,birthday=%(birthday)s,phone_number=%(phone_number)s
-                WHERE id= %(id)s;
+    def update(cls, data):
+        query = """
+                UPDATE users SET full_name = %(full_name)s, username = %(username)s, email = %(email)s, password = %(password)s,birthday= %(birthday)s,phone_number= %(phone_number)s, profile_image = %(profile_image)s
+                WHERE id = %(id)s;
                 """
-        return connectToMySQL(DATABASE).query_db(query,data)
-
+        return connectToMySQL(DATABASE).query_db(query, data)
 
     @staticmethod
     def validate_user(data):
