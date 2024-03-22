@@ -1,6 +1,8 @@
 from flask_app.configs.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask import flash
+from pprint import pprint
+from flask_app.models.users import User
 
 class Game:
     def __init__(self, data) :
@@ -59,9 +61,48 @@ class Game:
                 WHERE id= %(id)s;
                 """
         return connectToMySQL(DATABASE).query_db(query,data)
+    
+
+# ******************   READ ALL GAMES **************************************
+
+    @classmethod
+    def get_all_games(cls):
+
+        query = "SELECT * FROM games;"
+
+        results = connectToMySQL(DATABASE).query_db(query)
+
+        # print(results)
+
+        games_instances = []
+        if results:
+            for row in results:
+                one_game = Game(row)
+                games_instances.append(one_game)
+
+            return games_instances
+        
+        return []
 
 
+# ******************   READ GAME WITH USER **************************************
+    @classmethod
+    def get_one_game_with_user(cls, data):
 
+        query = """
+                    SELECT * FROM users
+                    JOIN games ON users.id = games.user_id
+                    WHERE games.id = %(id)s;
+                """
+        
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        pprint(results)
+
+        this_game = Game(results[0])
+        this_game.user = User(results[0])
+        print(this_game)
+        
+        return this_game
 
 
 

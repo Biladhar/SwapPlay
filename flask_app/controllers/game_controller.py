@@ -5,10 +5,11 @@ from flask_app.models.users import User
 
 
 
-# * View Route
+# * **************** VIEW ROUTE MARKET PLACE *********************
 @app.route("/marketplace")
 def marketplace():
-    return render_template("marketplace.html")
+    games = Game.get_all_games()
+    return render_template("marketplace.html", games = games)
 
 
 # ? =========  ADD GAME    ========================================
@@ -33,7 +34,7 @@ def new_game():
 # ? ==================================================================
 
 
-# ? ============= EDIT GAME ==========================
+# ? =============   EDIT GAME   ==========================
 # * view route edit game
 @app.route("/game/edit/<int:id>")
 def edit_game(id):
@@ -58,3 +59,17 @@ def edit_one_game(id):
     Game.edit_game(data)
     return redirect("/dashboard")
 # ? ======================================================
+
+# ? =============    MAKE OFFER   ==========================
+# * view route make offer
+@app.route("/game/offer/<int:id>")
+def offer(id):
+    if "user_id" not in session:
+        return redirect ("/")
+    data={
+        "id" : id
+    }
+    game1 = Game.get_one_game_with_user(data)
+    data2 = {"user_id": session["user_id"]}
+    offers = Game.get_one_user_games(data2)
+    return render_template("offer.html",game1 =game1, offers=offers)

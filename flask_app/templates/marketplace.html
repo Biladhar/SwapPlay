@@ -100,43 +100,29 @@
                 <th scope="col">Platform</th>
                 <th scope="col">State of Product</th>
                 <th scope="col">Swapper</th>
-                <th scope="col">Score</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
+            {%   for game in games   %}
             <tr>
-                <td> <img class="img_game" src="/static/images/forza.webp" alt=""> Game 1</td>
-                <td class="align-middle" >PlayStation</td>
-                <td class="align-middle" >Used</td>
-                <td class="align-middle" >User 1</td>
-                <td class="align-middle" >76</td>
-                <td class="align-middle" ><button class="btn btn-outline-success">Make offer</button></td>
+                <td class="align-middle d-flex justify-content-start align-items-center ps-5 ">
+                    <div class="div_image ">
+                        <img class="game_image" src="../static/images/{{game.image}}" alt="{{game.name}}"> 
+                    </div>
+                    <h5 class="text-center" >{{game.name}}</h5>
+                </td>
+                <td class="align-middle">{{game.platform}}</td>
+                <td class="align-middle">{{game.state}}</td>
+                <td class="align-middle">{{game.user_id}}</td>
+                <td class="align-middle">
+                    <a href="/game/offer/{{game.id}}">
+                        <button type="button" class="btn btn-primary">Make Offer</button>
+                    </a> 
+
+                </td>
             </tr>
-            <tr>
-                <td>Game 1</td>
-                <td class="align-middle" >Xbox</td>
-                <td class="align-middle" >Barely Used</td>
-                <td class="align-middle" >User 2</td>
-                <td class="align-middle" >87</td>
-                <td class="align-middle" ><button class="btn btn-outline-success">Make offer</button></td>
-            </tr>
-            <tr>
-                <td>Game 1</td>
-                <td class="align-middle" >PC</td>
-                <td class="align-middle" >New</td>
-                <td class="align-middle" >User 3</td>
-                <td class="align-middle" >100</td>
-                <td class="align-middle" ><button class="btn btn-outline-success">Make offer</button></td>
-            </tr>
-            <tr>
-                <td>Game 1</td>
-                <td class="align-middle" >PlayStation</td>
-                <td>Used</td>
-                <td class="align-middle" >User 4</td>
-                <td>56</td>
-                <td class="align-middle" ><button class="btn btn-outline-success">Make offer</button></td>
-            </tr>
+            {%   endfor   %}
         </tbody>
     </table>
 
