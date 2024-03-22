@@ -14,16 +14,13 @@ bcrypt = Bcrypt(app)
 def home():
     return render_template("landing_page.html")
 
-@app.route("/registration")
-def reg():
-    return render_template("registration_page.html")
 
 @app.route("/login")
 def log():
     return render_template("login.html")
 
 
-
+# ? ==============  dashboard view route ====================
 
 # * dashboard view route
 @app.route("/dashboard")
@@ -41,6 +38,10 @@ def dash():
     return render_template("dashboard.html", user = current_user, user_games = user_games  )
 
 
+
+@app.route("/registration")
+def reg():
+    return render_template("registration_page.html")
 
 #! ACTION ROUTE
 # === Register ===
@@ -89,6 +90,8 @@ def process_login():
     session["user_id"] = user_in_db.id
     return redirect("/dashboard")
 
+# ? ***************** EDIT PROFILE ***************
+# * view route edit profile
 @app.route("/users/edit/<int:id>")
 def edit_one(id):
     if "user_id" not in session:
@@ -99,6 +102,8 @@ def edit_one(id):
     user=User.get_by_id(data)
     return render_template("edit.html",user=user)
 
+
+# ! action route edit profile
 @app.route("/edit/<int:id>", methods=["POST"])
 def edit_users(id):
     pw_hash = bcrypt.generate_password_hash(request.form["password"])
@@ -110,7 +115,7 @@ def edit_users(id):
     }
     User.edit(data)
     return redirect("/dashboard")
-
+# ? ********************************************************************
 # # * View Route
 # @app.route("/dashboard")
 # def dash():

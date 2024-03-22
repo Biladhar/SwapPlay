@@ -16,6 +16,7 @@ class User:
         self.password = data["password"]
         self.birthday= data["birthday"]
         self.phone_number= data["phone_number"]
+        self.image= None
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
     # save user into the DB
@@ -23,8 +24,8 @@ class User:
     def create(cls, data):
 
         query = """
-                INSERT INTO users (full_name, username, email, password,birthday,phone_number)
-                VALUES(%(full_name)s, %(username)s, %(email)s, %(password)s,%(birthday)s,%(phone_number)s);
+                INSERT INTO users (full_name, username, email, password,birthday, image,phone_number)
+                VALUES(%(full_name)s, %(username)s, %(email)s, %(password)s,%(birthday)s,%(phone_number)s,"/static/images/user.jpg");
                 """
 
         return connectToMySQL(DATABASE).query_db(query, data)

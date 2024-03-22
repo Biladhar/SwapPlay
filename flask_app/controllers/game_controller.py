@@ -10,6 +10,8 @@ from flask_app.models.users import User
 def marketplace():
     return render_template("marketplace.html")
 
+
+# ? =========  ADD GAME    ========================================
 # * view route for the add new game form
 @app.route("/game/new")
 def add_game():
@@ -28,3 +30,31 @@ def new_game():
         }
         Game.add(data)
         return redirect("/dashboard")
+# ? ==================================================================
+
+
+# ? ============= EDIT GAME ==========================
+# * view route edit game
+@app.route("/game/edit/<int:id>")
+def edit_game(id):
+    if "user_id" not in session:
+        return redirect ("/")
+    data={
+        "id" : id
+    }
+    game = Game.get_one_game_with_id(data)
+    return render_template("edit_game.html",game=game)
+
+# ! action route edit game
+@app.route('/game/process/<int:id>', methods = ['POST'])
+def edit_one_game(id):
+    if not Game.validate_game(request.form):
+        return redirect(f"/game/edit/{id}")
+    data = {
+        **request.form,
+        "id" : id
+    }
+
+    Game.edit_game(data)
+    return redirect("/dashboard")
+# ? ======================================================

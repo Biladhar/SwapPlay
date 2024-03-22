@@ -13,7 +13,7 @@ class Game:
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
 
-# * create one game
+# ********************** CREATE ONE GAME ***********************
     @classmethod
     def add(cls, data):
         query = """
@@ -22,7 +22,7 @@ class Game:
                 """
         return connectToMySQL(DATABASE).query_db(query, data)
     
-# * get all the game of one user
+# ********************** GET ALL GAMES OF 1 USER ***********************
     @classmethod
     def get_one_user_games(cls, data2):
 
@@ -37,7 +37,28 @@ class Game:
             return no_game
         return result
 
+# ********************* GET ONE GAME WITH ID ***********************
+    @classmethod
+    def get_one_game_with_id(cls, data):
+
+        query = """
+                    SELECT * FROM games
+                    WHERE games.id = %(id)s;
+                """
         
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        return Game(result[0])
+    
+
+# ******************   EDIT GAME **************************************
+    @classmethod
+    def edit_game(cls,data):
+        query="""
+                UPDATE games
+                SET name=%(name)s, state=%(state)s, image= %(image)s, platform=%(platform)s
+                WHERE id= %(id)s;
+                """
+        return connectToMySQL(DATABASE).query_db(query,data)
 
 
 
@@ -60,7 +81,7 @@ class Game:
         if len(data["name"]) < 3:
             is_valid = False
             flash("name is required !", "game")
-        if len(data["platform"]) < 3:
+        if len(data["platform"]) < 2:
             is_valid = False
             flash("platform is required", "game")
         if len(data["state"]) < 3 :

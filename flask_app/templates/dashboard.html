@@ -69,7 +69,7 @@
                     <h6>number of swap : 002</h6>
                     <a href="">Pending swap</a>
                     <div class="">
-                        <a href="">Edit Profile</a>
+                        <a href="/users/edit/{{user.id}}">Edit Profile</a>
                     </div>
                 </div>
             </div>
@@ -99,8 +99,10 @@
                                 <td class="align-middle">{{game.platform}}</td>
                                 <td class="align-middle">{{game.state}}</td>
                                 <td class="align-middle">
-                                    <button class="btn btn-primary" >Edit</button>
-                                    <button class="btn btn btn-danger" type="submit" formaction="/action_page2.php">Delete</button>
+                                    <a href="/game/edit/{{game.id}}">
+                                        <button type="button" class="btn btn-primary">Edit</button>
+                                    </a> 
+                                    <button class="btn btn btn-danger" type="submit" formaction="">Delete</button>
                                 </td>
                             </tr>
                             {%   endfor   %}
