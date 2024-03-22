@@ -33,7 +33,7 @@ def process_register():
 
     # validate the form here ...
     if not User.validate_user(request.form):
-        return redirect("/")
+        return redirect("/register")
     # create the hash
     print("-------->", request.form["password"])
     pw_hash = bcrypt.generate_password_hash(request.form["password"])
@@ -52,7 +52,7 @@ def process_register():
 def process_login():
 
     if not User.validate_login_user(request.form):
-        return redirect("/")
+        return redirect("/login")
 
     # see if the username provided exists in the database
     data = {"email": request.form["email"]}
@@ -60,12 +60,12 @@ def process_login():
 
     if not user_in_db:
         flash("Invalid Email/Password", "login")
-        return redirect("/")
+        return redirect("/login")
 
     if not bcrypt.check_password_hash(user_in_db.password, request.form["password"]):
         # if we get False after checking the password
         flash("Invalid Email/Password", "login")
-        return redirect("/")
+        return redirect("/login")
 
     # get the user by his email
     session["user_id"] = user_in_db.id

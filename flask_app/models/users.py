@@ -15,6 +15,7 @@ class User:
         self.email = data["email"]
         self.password = data["password"]
         self.birthday= data["birthday"]
+        self.image = None
         self.phone_number= data["phone_number"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]

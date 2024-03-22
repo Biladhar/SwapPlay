@@ -6,21 +6,39 @@ class Game:
     def __init__(self, data) :
         self.id = data["id"]
         self.name = data["name"]
-        self.state = data["state"]
         self.image = data["image"]
-        self.platform = data["platform"]
-        self.user_id = data["user_id"]
+        self.genre = data["genre"]
+        self.release_date = data["release_date"]
+        self.pc = data["pc"]
+        self.playstation_4 = data["playstation_4"]
+        self.playstation_5 = data["playstation_5"]
+        self.x_box = data["x_box"]
+        self.switch = data["switch"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
 
-# * create one game
+
+
+    # ****************  get all games    ***********
     @classmethod
-    def add(cls, data):
+    def get_all_games(cls, data):
+
         query = """
-                INSERT INTO games (name, state,image,platform,user_id)
-                VALUES(%(name)s, %(state)s, %(image)s,%(platform)s,%(user_id)s);
-                """
-        return connectToMySQL(DATABASE).query_db(query, data)
+                    SELECT * FROM games
+            """
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
+        games_instances = []
+        if results:
+            for row in results:
+                one_game = Game(row)
+                games_instances.append(one_game)
+
+            return games_instances        
+        return []
+
+
+
 
 
 
