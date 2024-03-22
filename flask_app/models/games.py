@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> market_place
 from flask_app.configs.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask import flash
@@ -36,6 +41,35 @@ class Game:
         if len(result) < 1:
             return no_game
         return result
+<<<<<<< HEAD
+=======
+    
+    
+    @classmethod
+    def get_all_games(cls):
+        query = """
+                SELECT * FROM games;
+                """
+        results = connectToMySQL(DATABASE).query_db(query)
+        all_games =[]
+        for games in results :
+            all_games.append(cls(games))
+        return all_games
+    
+    @classmethod
+    def get_all_state(cls, state):
+        query = """
+                SELECT * FROM SwapPlay.games WHERE state LIKE %(state)s;
+                """
+
+        results = connectToMySQL(DATABASE).query_db(query, state)
+        print("*****************************",state)
+        state_games =[]
+        for state in results :
+            state_games.append(cls(state))
+        
+        return state_games
+>>>>>>> market_place
 
         
 
@@ -70,4 +104,9 @@ class Game:
             is_valid = False
             flash("image is required", "game")
 
+<<<<<<< HEAD
         return is_valid
+=======
+        return is_valid
+>>>>>>> Stashed changes
+>>>>>>> market_place

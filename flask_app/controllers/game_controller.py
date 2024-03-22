@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> market_place
 from flask_app import app
 from flask import redirect, render_template, request, flash, session
 from flask_app.models.games import Game
@@ -5,11 +10,14 @@ from flask_app.models.users import User
 
 
 
+<<<<<<< HEAD
 # * View Route
 @app.route("/marketplace")
 def marketplace():
     return render_template("marketplace.html")
 
+=======
+>>>>>>> market_place
 # * view route for the add new game form
 @app.route("/game/new")
 def add_game():
@@ -27,4 +35,32 @@ def new_game():
         "user_id":session["user_id"]
         }
         Game.add(data)
+<<<<<<< HEAD
         return redirect("/dashboard")
+=======
+        return redirect("/dashboard")
+
+@app.route("/marketplace/show_games")
+def show_all():
+    if "user_id" not in session:
+        return redirect ("/")
+    data = {
+        "id" : session["user_id"]
+    }
+    user = User.get_by_id(data)
+    all_games = Game.get_all_games()
+    return render_template("marketplace.html",all_games=all_games,user=user)
+
+@app.route("/marketplace/show_by_state", methods=["POST"])
+def show_state():
+    if "user_id" not in session:
+        return redirect ("/")
+    data = {
+        "id" : session["user_id"]
+    }
+    
+    user = User.get_by_id(data)
+    state_games = Game.get_all_state({"state" : request.form["state"]})
+    return render_template("marketplace_state.html", state_games=state_games,user=user)
+>>>>>>> Stashed changes
+>>>>>>> market_place
