@@ -16,7 +16,6 @@ class User:
         self.password = data["password"]
         self.birthday= data["birthday"]
         self.phone_number= data["phone_number"]
-        self.profile_image= data["profile_image"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
     # save user into the DB

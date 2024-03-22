@@ -37,7 +37,23 @@ class Game:
             return no_game
         return result
 
+    #* =========== READ ALL ===========
         
+    @classmethod
+    def get_all_games(cls):
+
+        query = "SELECT * FROM games;"
+
+        results = connectToMySQL(DATABASE).query_db(query)
+        games_instances = []
+        if results:
+            for row in results:
+                one_game = Game(row)
+                games_instances.append(one_game)
+
+            return games_instances
+        
+        return []
 
 
 

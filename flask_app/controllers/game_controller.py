@@ -5,10 +5,7 @@ from flask_app.models.users import User
 
 
 
-# * View Route
-@app.route("/marketplace")
-def marketplace():
-    return render_template("marketplace.html")
+
 
 # * view route for the add new game form
 @app.route("/game/new")
@@ -28,3 +25,10 @@ def new_game():
         }
         Game.add(data)
         return redirect("/dashboard")
+
+
+# **************  VIEW ROUTE MARKET PLACE**********************
+@app.route("/marketplace")
+def marketplace():
+    games = Game.get_all_games
+    return render_template("marketplace.html", games = games)
