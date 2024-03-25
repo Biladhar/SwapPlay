@@ -1,11 +1,10 @@
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> market_place
+
 from flask_app.configs.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask import flash
+from pprint import pprint
+from flask_app.models import users
+from flask_app.models.users import User
 
 class Game:
     def __init__(self, data) :
@@ -27,7 +26,51 @@ class Game:
                 """
         return connectToMySQL(DATABASE).query_db(query, data)
     
-# * get all the game of one user
+    # ******************   READ ALL GAMES **************************************
+
+    @classmethod
+    def get_all_games(cls):
+
+        query = "SELECT * FROM games;"
+
+        results = connectToMySQL(DATABASE).query_db(query)
+
+        # print(results)
+
+        games_instances = []
+        if results:
+            for row in results:
+                one_game = Game(row)
+                games_instances.append(one_game)
+
+            return games_instances
+        
+        return []
+    
+    # ******************   EDIT GAME **************************************
+    @classmethod
+    def edit_game(cls,data):
+        query="""
+                UPDATE games
+                SET name=%(name)s, state=%(state)s, image= %(image)s, platform=%(platform)s
+                WHERE id= %(id)s;
+                """
+        return connectToMySQL(DATABASE).query_db(query,data)
+    
+    # ********************* GET ONE GAME WITH ID ***********************
+    @classmethod
+    def get_one_game_with_id(cls, data):
+
+        query = """
+                    SELECT * FROM games
+                    WHERE games.id = %(id)s;
+                """
+        
+        result = connectToMySQL(DATABASE).query_db(query, data)
+        return Game(result[0])
+    
+
+# ********************** GET ALL GAMES OF 1 USER ***********************
     @classmethod
     def get_one_user_games(cls, data2):
 
@@ -41,20 +84,6 @@ class Game:
         if len(result) < 1:
             return no_game
         return result
-<<<<<<< HEAD
-=======
-    
-    
-    @classmethod
-    def get_all_games(cls):
-        query = """
-                SELECT * FROM games;
-                """
-        results = connectToMySQL(DATABASE).query_db(query)
-        all_games =[]
-        for games in results :
-            all_games.append(cls(games))
-        return all_games
     
     @classmethod
     def get_all_state(cls, state):
@@ -69,22 +98,55 @@ class Game:
             state_games.append(cls(state))
         
         return state_games
->>>>>>> market_place
 
+    
+# ******************   READ GAME WITH USER **************************************
+    @classmethod
+    def get_one_game_with_user(cls, data):
+
+        query = """
+                    SELECT * FROM users
+                    JOIN games ON users.id = games.user_id
+                    WHERE games.id = %(id)s;
+                """
         
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        pprint(results)
+        this_game = Game(results[0])
+        this_game.user = User(results[0])
+        print(this_game)        
+        return this_game
 
+    @classmethod
+    def get_all_games(cls):
+        query = """
+                SELECT * FROM users
+                JOIN games ON users.id = games.user_id
+                    
+                """
+        results = connectToMySQL(DATABASE).query_db(query)
+        print(f"RECIPES_WITH_USERS: ----{results}")
+        all_games =[]
+        for x in results:
+            game = cls(x)
+            data = {
+                **x,
+                "id":x['games.id'],
+                "created_at":x['games.created_at'],
+                "updated_at":x['games.updated_at']
+            }
+            game.posted_by = users.User(data)
+            game.gameid= users.User(data)
+            all_games.append(game)
+        return all_games
 
-
-
-
-
-
-
-
-
-
-
-
+    @classmethod
+    def delete_game_user(cls,data):
+        query="""
+                DELETE FROM games 
+                WHERE id=%(id)s
+                """
+        return connectToMySQL(DATABASE).query_db(query,data)
 
 
 
@@ -100,13 +162,9 @@ class Game:
         if len(data["state"]) < 3 :
             is_valid = False
             flash("state is required", "game")
-        if len(data["image"]) < 3:
-            is_valid = False
-            flash("image is required", "game")
+        # if len(data["image"]) < 3:
+        #     is_valid = False
+        #     flash("image is required", "game")
 
-<<<<<<< HEAD
         return is_valid
-=======
-        return is_valid
->>>>>>> Stashed changes
->>>>>>> market_place
+
