@@ -64,7 +64,7 @@
 
         </div>
         <div class="col-6">
-            <h1 class="mt-3">Add New Game</h1>
+            <h1 class="mt-3">Add a New Game</h1>
             {%for message in get_flashed_messages(category_filter=["game"])%}
             <p class="text-danger">{{message}}</p>
             {%endfor%}
@@ -78,20 +78,20 @@
                         <label class="col-sm-2 col-form-label" for="platform">Platform:</label>
                         <select name="platform" id="platform" class="form-select">
                             <option value="">--Please choose an option--</option>
-                            <option value="playstation 4">Playstation 4</option>
-                            <option value="playstation 5">Playstation 5</option>
-                            <option value="x-box">x-box</option>
-                            <option value="switch">Switch</option>
-                            <option value="switch">PC</option>
+                            <option value="Playstation 4">Playstation 4</option>
+                            <option value="Playstation 5">Playstation 5</option>
+                            <option value="X-box">X-box</option>
+                            <option value="Switch">Switch</option>
+                            <option value="PC">PC</option>
                         </select>
                     </div>
                     <div>
                         <label class="col-sm-2 col-form-label" for="platform">State:</label>
                         <select name="state" id="platform" class="form-select">
                             <option value="">--Please choose an option--</option>
-                            <option value="full">Full</option>
-                            <option value="with box , no documents">With Box , No documents</option>
-                            <option value="only game ">Only game </option>
+                            <option value="Full">Full</option>
+                            <option value="With box , no documents">With Box , No documents</option>
+                            <option value="Only game ">Only game </option>
                         </select>
                     </div>
                 </div>
