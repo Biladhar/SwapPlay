@@ -2,6 +2,7 @@ from flask_app import app
 from flask import redirect, render_template, request, flash, session
 from flask_app.models.games import Game
 from flask_app.models.users import User
+from flask_app.models.swaps import Swap
 from werkzeug.utils import secure_filename
 import os
 
@@ -14,7 +15,7 @@ def marketplace():
     games = Game.get_all_games()
     return render_template("marketplace.html" ,games = games)
 
-UPLOAD_FOLDER = 'C:/Users/kbeno/Desktop/py_project/SwapPlay/flask_app/static/images'
+UPLOAD_FOLDER = "C:/Users/sarsar/Desktop/SwapPlay/flask_app/static/images"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -134,6 +135,24 @@ def offer(id):
         }
     offers = Game.get_one_user_games(data)
     return render_template("offer.html",game1 =game1, offers=offers)
+# ! action route
+@app.route('/new_swap',methods=['POST'])
+def new_swap():
+        data = {
+        'game1_id': request.form['game1_id'],
+        'game_id': request.form['game_id'],
+        'status' : 1
+    }
+        print(data)
+        Swap.create_swap(data)
+        return redirect("/swap")
+
+# * View Route
+@app.route("/swap")
+def pending_swap():
+    
+    return render_template("swap.html")
+
 
 @app.route("/delete/<int:id>")
 def delete_game_(id):

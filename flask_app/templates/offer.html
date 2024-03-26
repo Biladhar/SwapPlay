@@ -12,57 +12,58 @@
 </head>
 
 <body>
-    <form action="/pending_offer" method="post">
-        <div class="container">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg bg-light navbar-light ">
-                <!-- Container wrapper -->
-                <div class="container-fluid">
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-light navbar-light ">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
 
 
-                    <img class="navbar-brand" src="/static/images/logo2.png" alt=""></a>
+                <img class="navbar-brand" src="/static/images/logo2.png" alt=""></a>
 
-                    <!-- Toggle button -->
-                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-                    <!-- Collapsible wrapper -->
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                            <!-- Link -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">My Profile</a>
-                            </li>
+                        <!-- Link -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">My Profile</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="/marketplace">Marketplace</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/marketplace">Marketplace</a>
+                        </li>
 
-                        </ul>
+                    </ul>
 
-                        <!-- Icons -->
-                        <ul class="navbar-nav d-flex flex-row align-items-center">
-                            <li class="nav-item me-3 me-lg-0">
-                                <img class="imgNav" src="{{ url_for('static', filename='images/notification.png') }}">
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout">Logout</a>
-                            </li>
-                        </ul>
+                    <!-- Icons -->
+                    <ul class="navbar-nav d-flex flex-row align-items-center">
+                        <li class="nav-item me-3 me-lg-0">
+                            <img class="imgNav" src="{{ url_for('static', filename='images/notification.png') }}">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                    </ul>
 
-                    </div>
                 </div>
-                <!-- Container wrapper -->
-            </nav>
-            <!-- Navbar -->
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+    <form action="/new_swap" method="post">
             <div class="d-flex" style="border: 1px solid black;">
                 <div class="border col-5 p-5 d-flex flex-column">
                     <img src="/static/images/{{game1.image}}" style="width: 200px; height: 200px; margin-left: 120px;"
                         alt="../static/images/{{game1.image}}">
+                    <input type="hidden" id="game1Id" name="game1_id" value="{{game1.id}}">
                     <h5>{{ game1.name}} </h5>
                     <h5>{{ game1.platform}} </h5>
                     <h5>{{ game1.state}} </h5>
@@ -70,7 +71,7 @@
                 </div>
                 <div class="border col-2">
                     <div>
-                        <button class="btn btn-success float-right">Offer</button>
+                        <button type="submit" class="btn btn-success float-right">Offer</button>
                     </div>
                 </div>
                 <div class="border col-5">
@@ -99,9 +100,9 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 
-    </form>
 
 </body>
 

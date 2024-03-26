@@ -123,7 +123,7 @@
                                     <th class="col-sm-2">{{game.gameid.id}}</th>
                                     <th class="col-md-2">
                                         {% if user.id == game.user_id %}
-                                        <button class=" btn btn-outline-danger" disabled>Make Offer</button>
+                                        <button class=" btn btn-outline-danger" disabled></button>
                                         {% else %}
                                         <a href="/game/offer/{{game.gameid.id}}">
                                             <button class=" btn btn-outline-success">Make Offer</button>
