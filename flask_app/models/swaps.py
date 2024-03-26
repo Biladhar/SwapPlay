@@ -16,7 +16,7 @@ class Swap:
     @classmethod
     def create_swap(cls, data):
         query = """
-                INSERT INTO swaps (status, game_id,game1_id)
+                INSERT INTO swaps (status, game_id, game1_id)
                 VALUES(%(status)s, %(game_id)s, %(game1_id)s);
                 """
         return connectToMySQL(DATABASE).query_db(query, data)
