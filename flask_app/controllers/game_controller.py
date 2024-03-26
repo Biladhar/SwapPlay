@@ -15,7 +15,7 @@ def marketplace():
     games = Game.get_all_games()
     return render_template("marketplace.html" ,games = games)
 
-UPLOAD_FOLDER = "C:/Users/kbeno/Desktop/py_project/SwapPlay/flask_app/static/images"
+UPLOAD_FOLDER = "C:/Users/sarsar/Desktop/SwapPlay/flask_app/static/images"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -139,17 +139,17 @@ def offer(id):
 @app.route('/new_swap',methods=['POST'])
 def new_swap():
         data = {
-        'game1_id': request.form['game1_id'],
-        'game_id': request.form['game_id'],
+            **request.form,
         'status' : 1
-    }
-        print(data)
+        }
+        print("*************",data)
         Swap.create_swap(data)
         return redirect("/swap")
 
 # * View Route
 @app.route("/swap")
 def pending_swap():
+
     
     return render_template("swap.html")
 
