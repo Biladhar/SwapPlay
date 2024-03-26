@@ -112,8 +112,15 @@ class Game:
         
         results = connectToMySQL(DATABASE).query_db(query, data)
         pprint(results)
-        this_game = Game(results[0])
-        this_game.user = User(results[0])
+        user = User(results[0])
+        game_dict={
+            **results[0],
+            "id":results[0]['games.id'],
+            "created_at":results[0]['games.created_at'],
+            "updated_at":results[0]['games.updated_at']
+        }
+        this_game = Game(game_dict)
+        this_game.user =user
         print(this_game)        
         return this_game
 
@@ -125,18 +132,19 @@ class Game:
                     
                 """
         results = connectToMySQL(DATABASE).query_db(query)
-        print(f"RECIPES_WITH_USERS: ----{results}")
+        print(f"GAMES_WITH_USERS: -----------{results}")
         all_games =[]
         for x in results:
-            game = cls(x)
+            user = users.User(x)
             data = {
                 **x,
                 "id":x['games.id'],
                 "created_at":x['games.created_at'],
                 "updated_at":x['games.updated_at']
             }
-            game.posted_by = users.User(data)
-            game.gameid= users.User(data)
+            game=cls(data)
+            game.posted_by =user
+            
             all_games.append(game)
         return all_games
 

@@ -89,7 +89,7 @@ def process_login():
     session["user_id"] = user_in_db.id
     return redirect("/dashboard")
 
-UPLOAD_FOLDER = 'C:/Users/sarsar/Desktop/SwapPlay/flask_app/static/images'
+UPLOAD_FOLDER = 'C:/Users/kbeno/Desktop/py_project/SwapPlay/flask_app/static/images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
