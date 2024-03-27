@@ -86,17 +86,33 @@ class Game:
         return result
     
     @classmethod
-    def get_all_state(cls, state):
-        query = """
-                SELECT * FROM SwapPlay.games WHERE state LIKE %(state)s;
-                """
+    def get_all_state(cls, data):
+        if data['state']=="any" and data['name']=='':
+            query = """
+                    SELECT * FROM games WHERE platform LIKE %(platform)s;
+                    """
+        elif data['platform']=="any" and data['name']=='':
+            query = """
+                    SELECT * FROM games WHERE state LIKE %(state)s;
+                    """
+        elif data['platform']=="any" and data['state']=="any":
+            query = """
+                    SELECT * FROM games WHERE name LIKE %(name)s;
+                    """
+        else:
+            query = """
+                    SELECT * FROM games WHERE platform LIKE %(platform)s
+                    AND state LIKE %(state)s AND name LIKE %(name)s;
+                    """
 
-        results = connectToMySQL(DATABASE).query_db(query, state)
-        print("*****************************",state)
+
+
+
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
         state_games =[]
         for state in results :
             state_games.append(cls(state))
-        
         return state_games
 
     
