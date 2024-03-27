@@ -149,9 +149,13 @@ def new_swap():
 # * View Route
 @app.route("/swap")
 def pending_swap():
-
+    data = {
+        'id' : session["user_id"]
+    }
+    all_swaps = Swap.get_all_swaps_for_user(data)
+    print(all_swaps)
     
-    return render_template("swap.html")
+    return render_template("swap.html",swaps =all_swaps)
 
 
 @app.route("/delete/<int:id>")

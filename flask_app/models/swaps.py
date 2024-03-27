@@ -1,5 +1,7 @@
 from flask_app.configs.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
+from flask_app.models import users
+from flask_app.models import games
 
 
 class Swap:
@@ -28,21 +30,41 @@ class Swap:
     @classmethod
     def get_all_swaps_for_user(cls, data):
         query = """
-                SELECT DISTINCT games.*, users.*
-                FROM games
-                JOIN swaps AS s1 ON games.id = s1.game_id OR games.id = s1.game1_id
-                JOIN swaps AS s2 ON s1.id = s2.id
-                JOIN users ON users.id = s2.game_user_id OR users.id = s2.game1_user_id
-                WHERE (s1.game_user_id = %(id)s OR s1.game1_user_id = %(id)s)
-                AND (users.id != %(id)s);
+                SELECT *FROM swaps
+                WHERE game_user_id = %(id)s
+                OR game1_user_id = %(id)s;
                 """
-        # OR 
-        # query = """
-        #         SELECT *FROM swaps
-        #         WHERE game_user_id = %(id)s
-        #         OR game1_user_id = %(id)s;
-        #         """
-        return connectToMySQL(DATABASE).query_db(query, data)
+        results = connectToMySQL(DATABASE).query_db(query, data)
+        all_swap = []
+        for x in results:
+            swap = Swap(x)
+            data1 = {
+                **x,
+                "id":x['game_id']
+            }
+            data2 = {
+                **x,
+                "id":x['game1_id']
+            }
+            data3 = {
+                **x,
+                "id":x['game1_user_id']
+            }
+            data4 = {
+                **x,
+                "id":x['game_user_id']
+            }
+            game=games.Game.get_game_id(data1)
+            swap.game = game
+            game1=games.Game.get_game_id(data2)
+            swap.game1 = game1
+            user1=users.User.get_by_id(data3)
+            swap.user1 = user1
+            user=users.User.get_by_id(data4)
+            swap.user = user
+
+            all_swap.append(swap)
+        return all_swap
     
     
     

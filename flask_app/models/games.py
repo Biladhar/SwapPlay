@@ -155,6 +155,13 @@ class Game:
                 WHERE id=%(id)s
                 """
         return connectToMySQL(DATABASE).query_db(query,data)
+    
+
+    @classmethod
+    def get_game_id(cls,data):
+        query = "SELECT * FROM games WHERE games.id = %(id)s;"
+        return connectToMySQL(DATABASE).query_db(query,data)
+
 
 
 
