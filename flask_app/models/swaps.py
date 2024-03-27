@@ -60,9 +60,7 @@ class Swap:
             swap.game = game
 
             game_selected=games.Game.get_game_id(data2)
-            pprint(game_selected)
             game1 = games.Game(game_selected[0])
-            pprint(game1)
             swap.game1 = game1
 
             user1=users.User.get_by_id(data3)
