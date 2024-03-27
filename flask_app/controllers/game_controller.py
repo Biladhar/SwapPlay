@@ -3,6 +3,8 @@ from flask import redirect, render_template, request, flash, session
 from flask_app.models.games import Game
 from flask_app.models.users import User
 from flask_app.models.swaps import Swap
+from flask_app.controllers import swap_controller
+
 from werkzeug.utils import secure_filename
 import os
 
@@ -146,17 +148,7 @@ def new_swap():
         Swap.create_swap(data)
         return redirect("/swap")
 
-# * View Route
-@app.route("/swap")
-def pending_swap():
-    data = {
-        'id' : session["user_id"]
-    }
-    all_swaps = Swap.get_all_swaps_for_user(data)
-    print(all_swaps)
-    user = User.get_by_id(data)
-    
-    return render_template("swap.html",swaps =all_swaps, user = user)
+
 
 
 @app.route("/delete/<int:id>")

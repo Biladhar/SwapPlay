@@ -73,7 +73,7 @@
                 </div>
                         {%    if swap.user1.id == user.id      %}
                 <div class="d-flex gap-5" >
-                    <form action="" method="post">
+                    <form action="/" method="post">
                         <button type="button" class="btn btn-success">Accept</button>
                     </form>
                     <form action="" method="post">
@@ -94,7 +94,7 @@
                     <div class="status3">
                         <h3>Accepted</h3>
                     </div>
-                    <form action="" method="post">
+                    <form action="/swap_contact/{{swap.id}}" method="post">
                         <button type="button" class="btn btn-primary">view</button>
                     </form>
                 </div>
