@@ -1,0 +1,67 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-image: url('/static/images/background2.png');
+    background-size: cover;
+}
+
+.all{
+    border: 2px solid black;
+    width: 100vw;
+    height: 100vh;
+    padding: 10px;
+}
+
+.div_image{
+    width: 5rem; /* I took the width from your post and placed it in css */
+    height: 5rem;
+}
+
+.game_image{
+    height: 100%;
+    width: 100%;
+    object-fit: scale-down;
+}
+
+.status{
+    width: 8rem;
+    height: 4rem;
+    border: 3px solid rgb(255, 255, 255);
+    padding: 10px;
+    background-color: chocolate;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 17px;
+    border-radius: 30%;
+}
+
+.status2{
+    width: 8rem;
+    height: 4rem;
+    border: 3px solid rgb(255, 255, 255);
+    padding: 10px;
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 17px;
+    border-radius: 30%;
+}
+
+.status3{
+    width: 8rem;
+    height: 4rem;
+    border: 3px solid rgb(255, 255, 255);
+    padding: 10px;
+    background-color: green;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 17px;
+    border-radius: 30%;
+}

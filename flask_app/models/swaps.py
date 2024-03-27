@@ -2,6 +2,7 @@ from flask_app.configs.mysqlconnection import connectToMySQL
 from flask_app import DATABASE
 from flask_app.models import users
 from flask_app.models import games
+from pprint import pprint
 
 
 class Swap:
@@ -54,12 +55,20 @@ class Swap:
                 **x,
                 "id":x['game_user_id']
             }
-            game=games.Game.get_game_id(data1)
+            game_offer=games.Game.get_game_id(data1)
+            game = games.Game(game_offer[0])
             swap.game = game
-            game1=games.Game.get_game_id(data2)
+
+            game_selected=games.Game.get_game_id(data2)
+            pprint(game_selected)
+            game1 = games.Game(game_selected[0])
+            pprint(game1)
             swap.game1 = game1
+
             user1=users.User.get_by_id(data3)
             swap.user1 = user1
+
+            
             user=users.User.get_by_id(data4)
             swap.user = user
 

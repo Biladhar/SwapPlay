@@ -154,8 +154,9 @@ def pending_swap():
     }
     all_swaps = Swap.get_all_swaps_for_user(data)
     print(all_swaps)
+    user = User.get_by_id(data)
     
-    return render_template("swap.html",swaps =all_swaps)
+    return render_template("swap.html",swaps =all_swaps, user = user)
 
 
 @app.route("/delete/<int:id>")
