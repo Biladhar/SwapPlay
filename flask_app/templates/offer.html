@@ -58,7 +58,7 @@
             <!-- Container wrapper -->
         </nav>
         <!-- Navbar -->
-    <form action="/new_swap" method="post">
+        <form action="/new_swap" method="post">
             <div class="d-flex" style="border: 1px solid black;">
                 <div class="border col-5 p-5 d-flex flex-column">
                     <img src="/static/images/{{game1.image}}" style="width: 200px; height: 200px; margin-left: 120px;"
@@ -67,12 +67,13 @@
                     <h5>{{ game1.name}} </h5>
                     <h5>{{ game1.platform}} </h5>
                     <h5>{{ game1.state}} </h5>
-                    <h5><input type="hidden" id="user1_Id" name="game1_user_id" value="{{game1.user.id}}">{{ game1.user.username}} </h5>
+                    <h5><input type="hidden" id="user1_Id" name="game1_user_id" value="{{game1.user.id}}">{{
+                        game1.user.username}} </h5>
                 </div>
                 <div class="border col-2">
                     <div>
                         <button type="submit" class="btn btn-success float-right">Offer</button>
-                        {%    for game in offers      %}
+                        {% for game in offers %}
                         <input type="hidden" id="user_id" name="game_user_id" value="{{game.user_id}}">
                         {% endfor %}
                     </div>
@@ -89,13 +90,13 @@
                             <tr>
                                 <td class="align-middle d-flex justify-content-start align-items-center ps-5 ">
                                     <input type="radio" name="game_id" value="{{game.id}}" required
-                                    style="height: 40px;">
-                                        <div class="div_image ">
+                                        style="height: 40px;">
+                                    <div class="div_image ">
                                         <img class="game_image"
                                             src="{{ url_for('static', filename='images/' + game.image) }}"
                                             alt="{{game.name}}" style="width: 70px;">
-                                        </div>
-                                        <h5 class="text-center">{{game.name}}</h5>
+                                    </div>
+                                    <h5 class="text-center">{{game.name}}</h5>
                                 </td>
                             </tr>
                             {% endfor %}

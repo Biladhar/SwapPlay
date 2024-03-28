@@ -4,17 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swap</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for ('static', filename='css/style_navbar.css' ) }}">
-    <link rel="stylesheet" href="{{ url_for ('static', filename='css/swap.css' ) }}">
-
-
-    <title>swap</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swap.css') }}">
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-0evHeTauVdejhmHA2wnMfK3j7l/C6+QpRoxmN1RzpPuFdJf4M7JfrPJv9K4Ry/hJ"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" style="width: 1000px;">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg bg-light navbar-light ">
             <!-- Container wrapper -->
@@ -29,17 +33,22 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                 </button>
+
                 <!-- Collapsible wrapper -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                         <!-- Link -->
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard">My Profile</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="/marketplace">Marketplace</a>
                         </li>
+
                     </ul>
+
                     <!-- Icons -->
                     <ul class="navbar-nav d-flex flex-row align-items-center">
                         <li class="nav-item me-3 me-lg-0">
@@ -49,66 +58,49 @@
                             <a class="nav-link" href="/logout">Logout</a>
                         </li>
                     </ul>
-                </div>
 
-                <!-- Container wrapper -->
+                </div>
+            </div>
+            <!-- Container wrapper -->
         </nav>
         <!-- Navbar -->
-    </div>
-    <div class="container all">
+        <!-- Swap Cards -->
         {% for swap in swaps %}
-        <div class="col-12 border border-2 m-2 d-flex">
-            <div class="col-5 d-flex flex-column justify-content-center align-items-center p-2">
-                <div class="div_image">
-                    <img class="game_image" src="{{ url_for('static', filename='images/' + swap.game1.image) }}" alt="">
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-5 d-flex flex-column justify-content-center align-items-center p-2">
+                    <img src="{{ url_for('static', filename='images/' + swap.game1.image) }}"
+                        class="img-fluid rounded-start" alt="{{ swap.game1.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ swap.game1.name }}</h5>
+                        <p class="card-text">{{ swap.user1.username }}</p>
+                    </div>
                 </div>
-                <h4>{{swap.game1.name}}</h4>
-                <h4>{{swap.user1.username}}</h4>
-
-            </div>
-            <div class="col-2 d-flex flex-column align-items-center justify-content-evenly">
-                {% if swap.status == 1 %}
-                <div class="status">
-                    <h3>Pending</h3>
-                </div>
-                {% if swap.user1.id == user.id %}
-                <div class="d-flex gap-5">
-                    <a href="/swap/{{swap.id}}">Accept</a>
-                    <form action="" method="post">
+                <div class="col-md-2 d-flex flex-column align-items-center justify-content-center">
+                    {% if swap.status == 1 %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                    {% if swap.user1.id == user.id %}
+                    <div class="mt-2">
+                        <a href="/swap/{{ swap.id }}" class="btn btn-success">Accept</a>
                         <button type="button" class="btn btn-danger">Refuse</button>
-                    </form>
+                    </div>
+                    {% endif %}
+                    {% elif swap.status == 0 %}
+                    <span class="badge bg-danger">Refused</span>
+                    {% endif %}
                 </div>
-                {% endif %}
-                {% endif %}
-                {% if swap.status == 0 %}
-                <div class="col-2 d-flex flex-column align-items-center justify-content-evenly">
-                    <div class="status2">
-                        <h3>refused</h3>
+                <div class="col-md-5 d-flex flex-column justify-content-center align-items-center p-2">
+                    <img src="{{ url_for('static', filename='images/' + swap.game.image) }}"
+                        class="img-fluid rounded-end" alt="{{ swap.game.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ swap.game.name }}</h5>
+                        <p class="card-text">{{ swap.user.username }}</p>
                     </div>
                 </div>
-                {% endif %}
-                {% if swap.status == 2 %}
-                <div class="col-2 d-flex flex-column align-items-center justify-content-evenly">
-                    <div class="status3">
-                        <h3>Accepted</h3>
-                    </div>
-                    <form action="" method="post">
-                        <button type="button" class="btn btn-primary">view</button>
-                    </form>
-                </div>
-                {% endif %}
-            </div>
-            <div class="col-5 d-flex flex-column justify-content-center align-items-center p-2">
-                <div class="div_image">
-                    <img class="game_image" src="{{ url_for('static', filename='images/' + swap.game.image) }}" alt="">
-                </div>
-                <h4>{{swap.game.name}}</h4>
-                <h4>{{swap.user.username}}</h4>
             </div>
         </div>
-
-
-
         {% endfor %}
     </div>
 </body>
+
+</html>
