@@ -18,7 +18,43 @@ def pending_swap():
     return render_template("swap.html",swaps =all_swaps, user = user)
 
 
+# * view route
+@app.route("/swap/<int:id>")
+def swap_contact(id):
+    data = {
+        'id' : id
+    }
+    swap = Swap.get_one_swaps_by_id(data)
+    return render_template("end_swap.html", swap = swap)
 
+
+# ! action route Accept swap
+@app.route("/swap/process", methods = ['POST'])
+def swap_process():
+    if "user_id" not in session:
+        return redirect ("/")
+    data={
+        **request.form,
+        'id' : request.form['swap_id']
+    }
+    Swap.accept_swap(data)
+    print("***********************",)
+    return redirect(f"/swap/{request.form['swap_id']}")
+
+
+# ! action route refuse swap
+@app.route("/swap/refuse", methods = ['POST'])
+def swap_refuse():
+    if "user_id" not in session:
+        return redirect ("/")
+    print(request.form)
+    data={
+        **request.form,
+        'id' : request.form['swap_id']
+    }
+    Swap.refuse_swap(data)
+    print("***********************")
+    return redirect("/swap")
 # # * view route
 # @app.route("/swap/<int:id>")
 # def swap_contact(id):
@@ -27,15 +63,4 @@ def pending_swap():
 #     }
 #     swap = Swap.get_one_swaps_by_id(data)
 #     return render_template("end_swap.html",swap = swap )
-# # ! action route Accept swap
-# @app.route("/swap/process", methods = ['POST'])
-# def swap_contact(id):
-#     if "user_id" not in session:
-#         return redirect ("/")
-#     data={
-#         "id" : id
-#     }
-#     Swap.get_one_swaps_by_id(data)
-
-#     return redirect("/swap_contact")
 

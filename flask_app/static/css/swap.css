@@ -65,3 +65,29 @@ body {
     padding-top: 17px;
     border-radius: 30%;
 }
+
+.swap_img{
+    width: 5rem;
+    height: 5rem;
+}
+
+.user_image{
+    width: 5rem;
+    height: 5rem;
+}
+
+
+.div_image1{
+    width: 10rem; /* I took the width from your post and placed it in css */
+    height: 7rem;
+}
+
+.game_image1{
+    height: 100%;
+    width: 100%;
+    object-fit: scale-down;
+}
+
+.box{
+    background-color: #f8f9fa;
+}

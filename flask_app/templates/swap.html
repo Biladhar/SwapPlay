@@ -73,9 +73,13 @@
                 </div>
                         {%    if swap.user1.id == user.id      %}
                 <div class="d-flex gap-5" >
-                    <a href="/swap/{{swap.id}}">Accept</a>
-                    <form action="" method="post">
-                        <button type="button" class="btn btn-danger">Refuse</button>
+                    <form action="/swap/process" method="post">
+                        <input type="hidden" id="swap_id" name="swap_id" value="{{swap.id}}">
+                        <button type="submit" class="btn btn-success">Accept</button>
+                    </form>
+                    <form action="/swap/refuse" method="post">
+                        <input type="hidden" id="swap" name="swap_id" value="{{swap.id}}">
+                        <button type="submit" class="btn btn-danger">Refuse</button>
                     </form>
                 </div>
                         {% endif  %}
@@ -92,9 +96,9 @@
                     <div class="status3">
                         <h3>Accepted</h3>
                     </div>
-                    <form action="/swap_contact/{{swap.id}}" method="post">
-                        <button type="button" class="btn btn-primary">view</button>
-                    </form>
+                    <div>
+                        <a href="/swap/{{swap.id}}">view</a>
+                </div>
                 </div>
             {%   endif      %}
             </div>

@@ -81,44 +81,96 @@ class Swap:
                 WHERE swaps.id = %(id)s ;
                 """
         results = connectToMySQL(DATABASE).query_db(query, data)
-        swap = Swap(results)
-        
-        data1 = {
-                **results,
-                "id":results['game_id']
+        pprint(results)
+        for x in results:
+            swap = Swap(x)
+            data1 = {
+                **x,
+                "id":x['game_id']
             }
-        data2 = {
-                **results,
-                "id":results['game1_id']
+            data2 = {
+                **x,
+                "id":x['game1_id']
             }
-        data3 = {
-                **results,
-                "id":results['game1_user_id']
+            data3 = {
+                **x,
+                "id":x['game1_user_id']
             }
-        data4 = {
-                **results,
-                "id":results['game_user_id']
+            data4 = {
+                **x,
+                "id":x['game_user_id']
             }
-        game_offer=games.Game.get_game_id(data1)
-        game = games.Game(game_offer[0])
-        swap.game = game
+            game_offer=games.Game.get_game_id(data1)
+            game = games.Game(game_offer[0])
+            swap.game = game
 
-        game_selected=games.Game.get_game_id(data2)
-        game1 = games.Game(game_selected[0])
-        swap.game1 = game1
+            game_selected=games.Game.get_game_id(data2)
+            game1 = games.Game(game_selected[0])
+            swap.game1 = game1
 
-        user1=users.User.get_by_id(data3)
-        swap.user1 = user1
+            user1=users.User.get_by_id(data3)
+            swap.user1 = user1
 
             
-        user=users.User.get_by_id(data4)
-        swap.user = user
+            user=users.User.get_by_id(data4)
+            swap.user = user
 
+        pprint(swap)
         return swap
+
+
+        # data1 = {
+        #         **results,
+        #         "id":results['game_id']
+        #     }
+        # pprint(data1)
+        # data2 = {
+        #         **results,
+        #         "id":results['game1_id']
+        #     }
+        # data3 = {
+        #         **results,
+        #         "id":results['game1_user_id']
+        #     }
+        # data4 = {
+        #         **results,
+        #         "id":results['game_user_id']
+        #     }
+        # game_offer=games.Game.get_game_id(data1)
+        # pprint(game_offer)
+        # game = games.Game(game_offer[0])
+        # swap.game = game
+
+        # game_selected=games.Game.get_game_id(data2)
+        # game1 = games.Game(game_selected[0])
+        # swap.game1 = game1
+
+        # user1=users.User.get_by_id(data3)
+        # swap.user1 = user1
+
+            
+        # user=users.User.get_by_id(data4)
+        # swap.user = user
+
+        # pprint(swap)
+
+        # return swap
 
     @classmethod
     def accept_swap(cls, data):
-        pass
+        query = """
+                UPDATE swaps SET status = 2 
+                WHERE id = %(id)s ;
+                """
+        return connectToMySQL(DATABASE).query_db(query, data)
+    
+    @classmethod
+    def refuse_swap(cls, data):
+        query = """
+                UPDATE swaps SET status = 0 
+                WHERE id = %(id)s ;
+                """
+        return connectToMySQL(DATABASE).query_db(query, data)
     
     
     
