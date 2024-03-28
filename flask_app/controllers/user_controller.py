@@ -7,6 +7,7 @@ import os
 
 from flask_app.models.games import Game
 from flask_app.models.users import User
+from flask_app.models.swaps import Swap
 
 bcrypt = Bcrypt(app)
 
@@ -38,7 +39,8 @@ def dash():
     # grab the user id from session and put in a dictionary
     data2 = {"user_id": session["user_id"]}
     user_games = Game.get_one_user_games(data2)
-    return render_template("dashboard.html", user = current_user, user_games = user_games  )
+    swaps = Swap.get_all_swaps_for_user(data)
+    return render_template("dashboard.html", user = current_user, user_games = user_games ,swaps = swaps )
 
 
 

@@ -120,32 +120,40 @@
                 </div>
                 <div class="m-5"></div>
                 <div class="d-flex justify-content-between">
-                    <h5>My Games</h5>
-                    <h5><a href="">Add Game to wishlist</a></h5>
+                    <h5><a href="/swap">My Swaps</a></h5>
+
                 </div>
                 <div class="border border-dark p-3">
                     <table class="table ">
                         <thead>
                             <tr>
                                 <th>Game</th>
-                                <th>Platform</th>
-                                <th>Nr of Offers</th>
-                                <th>Make an offer</th>
+                                <th>status</th>
+                                <th>offer</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>game 1</td>
-                                <td>Playstation</td>
-                                <td>new</td>
-                                <td>yes</td>
+                            {%   for swap in swaps    %}
+                            {%   if swap.status == 1   %}
+                            <tr class="table-warning">
+                                <td>{{swap.game1.name}}</td>
+                                <td>Pending</td>
+                                <td>{{swap.game.name}}</td>
                             </tr>
-                            <tr>
-                                <td>game 1</td>
-                                <td>Playstation</td>
-                                <td>new</td>
-                                <td>yes</td>
+                            {%    elif      swap.status==0             %}
+                            <tr class="table-danger">
+                                <td>{{swap.game1.name}}</td>
+                                <td>Refused</td>
+                                <td>{{swap.game.name}}</td>
                             </tr>
+                            {%     else        %}
+                            <tr class="table-success">
+                                <td>{{swap.game1.name}}</td>
+                                <td>Accepted</td>
+                                <td>{{swap.game.name}}</td>
+                            </tr>
+                            {%      endif        %}
+                            {%   endfor    %}
                         </tbody>
                     </table>
                 </div>

@@ -33,7 +33,8 @@ class Swap:
         query = """
                 SELECT *FROM swaps
                 WHERE game_user_id = %(id)s
-                OR game1_user_id = %(id)s;
+                OR game1_user_id = %(id)s
+                ORDER BY created_at DESC;
                 """
         results = connectToMySQL(DATABASE).query_db(query, data)
         all_swap = []
