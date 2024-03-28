@@ -110,10 +110,15 @@
                                     <th class="col-sm-2">{{game.name}}</th>
                                     <th class="col-sm-2">{{game.state}}</th>
                                     <th class="col-sm-2">{{game.platform}}</th>
-                                    <th class="col-sm-2">{{user.username}}</th>
-                                    <th class="col-sm-2">SCORE***NOTDONE</th>
+                                    <th class="col-sm-2">{{game.posted_by.username}}</th>
                                     <th class="col-md-2">
-                                        <button class=" btn btn-outline-success">Make Offer</button>
+                                        {% if user.id == game.user_id %}
+                                        <button class="btn btn-outline-danger" disabled>My Game</button>
+                                        {% else %}
+                                        <a href="/game/offer/{{game.id}}">
+                                            <button class=" btn btn-outline-success">Make Offer</button>
+                                        </a>
+                                        {% endif %}
                                     </th>
                                 </tr>
                             </tbody>

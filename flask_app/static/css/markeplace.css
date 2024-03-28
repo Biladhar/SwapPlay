@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
@@ -11,7 +11,8 @@ body {
 }
 
 
-.img_game{
+
+.img_game {
     height: 14vh;
     width: 5vw;
 }

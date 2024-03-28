@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
@@ -12,18 +12,29 @@ body {
 
 
 
-.user_img{
+.user_img {
     height: 21vh;
     width: 11vw;
 }
 
-.div_image{
-    width: 5rem; /* I took the width from your post and placed it in css */
+.div_image {
+    width: 5rem;
+    /* I took the width from your post and placed it in css */
     height: 5rem;
 }
 
-.game_image{
+.game_image {
     height: 100%;
     width: 100%;
     object-fit: scale-down;
+}
+
+.mygame {
+    height: 250px;
+    overflow: auto;
+}
+
+.myswap {
+    height: 250px;
+    overflow: auto;
 }

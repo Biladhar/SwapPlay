@@ -71,7 +71,7 @@
                     <img class="user_img" style="border-radius: 50px; width: 150px;"
                         src="{{ url_for('static', filename='images/' + user.profile_image) }}" alt="">
                     <h4>{{user.username}}</h4>
-                    <h6>number of swap : 002</h6>
+                    <!-- <h6>number of swap : 002</h6> -->
                     <a href="/swap">Pending swap</a>
                     <div class="">
                         <a href="/users/edit">Edit Profile</a>
@@ -83,7 +83,7 @@
                     <h5>My Games</h5>
                     <h5><a href="/game/add">Add Game</a></h5>
                 </div>
-                <div class="border border-dark p-3">
+                <div class="border border-dark mygame p-3">
                     <table class="table ">
                         <thead>
                             <tr>
@@ -123,7 +123,7 @@
                     <h5><a href="/swap">My Swaps</a></h5>
 
                 </div>
-                <div class="border border-dark p-3">
+                <div class="border border-dark p-3 myswap">
                     <table class="table ">
                         <thead>
                             <tr>
@@ -133,27 +133,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {%   for swap in swaps    %}
-                            {%   if swap.status == 1   %}
+                            {% for swap in swaps %}
+                            {% if swap.status == 1 %}
                             <tr class="table-warning">
                                 <td>{{swap.game1.name}}</td>
                                 <td>Pending</td>
                                 <td>{{swap.game.name}}</td>
                             </tr>
-                            {%    elif      swap.status==0             %}
+                            {% elif swap.status==0 %}
                             <tr class="table-danger">
                                 <td>{{swap.game1.name}}</td>
                                 <td>Refused</td>
                                 <td>{{swap.game.name}}</td>
                             </tr>
-                            {%     else        %}
+                            {% else %}
                             <tr class="table-success">
                                 <td>{{swap.game1.name}}</td>
                                 <td>Accepted</td>
                                 <td>{{swap.game.name}}</td>
                             </tr>
-                            {%      endif        %}
-                            {%   endfor    %}
+                            {% endif %}
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

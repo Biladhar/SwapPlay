@@ -50,69 +50,61 @@
                         </li>
                     </ul>
                 </div>
-            
-            <!-- Container wrapper -->
+
+                <!-- Container wrapper -->
         </nav>
         <!-- Navbar -->
     </div>
     <div class="container all">
-        {%    for swap in swaps      %}
-        <div class="col-12 border border-2 m-2 d-flex">
-            <div class="col-5 d-flex flex-column justify-content-center align-items-center p-2">
-                <div class="div_image">
-                    <img class="game_image" src="{{ url_for('static', filename='images/' + swap.game1.image) }}" alt="">
-                </div>
-                <h4>{{swap.game1.name}}</h4>
-                <h4>{{swap.user1.username}}</h4>
-                
-            </div>
-            <div class="col-2 d-flex flex-column align-items-center justify-content-evenly">
-            {%      if swap.status == 1              %}
-                <div class="status">
-                    <h3>Pending</h3>
-                </div>
-                        {%    if swap.user1.id == user.id      %}
-                <div class="d-flex gap-5" >
-                    <form action="/swap/process" method="post">
-                        <input type="hidden" id="swap_id" name="swap_id" value="{{swap.id}}">
-                        <button type="submit" class="btn btn-success">Accept</button>
-                    </form>
-                    <form action="/swap/refuse" method="post">
-                        <input type="hidden" id="swap" name="swap_id" value="{{swap.id}}">
-                        <button type="submit" class="btn btn-danger">Refuse</button>
-                    </form>
-                </div>
-                        {% endif  %}
-                        {%  endif  %}
-                {%      if swap.status == 0             %}
-                <div class="col-2 d-flex flex-column align-items-center justify-content-evenly">
-                    <div class="status2">
-                        <h3>refused</h3>
+        {% for swap in swaps %}
+        <div class="card mb-2">
+            <div class="row g-0">
+                <div class="col-md-5 d-flex flex-column justify-content-center align-items-center p-2">
+                    <img src="{{ url_for('static', filename='images/' + swap.game1.image) }}"
+                        class="img-fluid rounded-start" alt="{{ swap.game1.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ swap.game1.name }}</h5>
+                        <p class="card-text">{{ swap.user1.username }}</p>
                     </div>
                 </div>
-                {%    endif    %}
-                {%    if swap.status == 2   %}
-                <div class="col-2 d-flex flex-column align-items-center justify-content-evenly">
-                    <div class="status3">
-                        <h3>Accepted</h3>
+                <div class="col-md-2 d-flex flex-column align-items-center justify-content-center">
+                    {% if swap.status == 1 %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                    {% if swap.user1.id == user.id %}
+                    <div class="d-flex gap-5">
+                        <form action="/swap/process" method="post">
+                            <input type="hidden" id="swap_id" name="swap_id" value="{{swap.id}}">
+                            <button type="submit" class="btn btn-success">Accept</button>
+                        </form>
+                        <form action="/swap/refuse" method="post">
+                            <input type="hidden" id="swap" name="swap_id" value="{{swap.id}}">
+                            <button type="submit" class="btn btn-danger">Refuse</button>
+                        </form>
                     </div>
-                    <div>
-                        <a href="/swap/{{swap.id}}">view</a>
+                    {% endif %}
+                    {% endif %}
+                    {% if swap.status == 0 %}
+                    <span class="badge bg-danger">Refused</span>
+                    {% endif %}
+                    {% if swap.status == 2 %}
+                    <div class="col-2 d-flex flex-column align-items-center justify-content-evenly">
+                        <span class="badge bg-success">Accepted</span>
+                        <div>
+                            <a href="/swap/{{swap.id}}">view</a>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
+                <div class="col-md-5 d-flex flex-column justify-content-center align-items-center p-2">
+                    <img src="{{ url_for('static', filename='images/' + swap.game.image) }}"
+                        class="img-fluid rounded-end" alt="{{ swap.game.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ swap.game.name }}</h5>
+                        <p class="card-text">{{ swap.user.username }}</p>
+                    </div>
                 </div>
-            {%   endif      %}
-            </div>
-            <div class="col-5 d-flex flex-column justify-content-center align-items-center p-2">
-                <div class="div_image">
-                    <img class="game_image" src="{{ url_for('static', filename='images/' + swap.game.image) }}" alt="">
-                </div>
-                <h4>{{swap.game.name}}</h4>
-                <h4>{{swap.user.username}}</h4>
             </div>
         </div>
-
-
-
-        {%        endfor                  %}
+        {% endfor %}
     </div>
 </body>

@@ -25,7 +25,7 @@ class User:
 
         query = """
                 INSERT INTO users (full_name, username, email, password,birthday,phone_number,profile_image)
-                VALUES(%(full_name)s, %(username)s, %(email)s, %(password)s,%(birthday)s,%(phone_number)s,"/static/images/user.jpg");
+                VALUES(%(full_name)s, %(username)s, %(email)s, %(password)s,%(birthday)s,%(phone_number)s,"user.jpg");
                 """
 
         return connectToMySQL(DATABASE).query_db(query, data)
