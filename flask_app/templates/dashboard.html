@@ -65,23 +65,27 @@
     </div>
     <div class="container ">
         <div class="row ">
-            <div class="col-sm-4 p-3 ">
-                <div
-                    class="h-100 d-inline-block d-flex flex-column justify-content-evenly align-items-center border border-dark">
-                    <img class="user_img" style="border-radius: 50px; width: 150px;"
-                        src="{{ url_for('static', filename='images/' + user.profile_image) }}" alt="">
-                    <h4>{{user.username}}</h4>
-                    <!-- <h6>number of swap : 002</h6> -->
-                    <a href="/swap">Pending swap</a>
-                    <div class="">
-                        <a href="/users/edit">Edit Profile</a>
+            <div class="col-sm-4 p-3">
+                <div class="card h-100">
+                    <img class="card-img-top rounded-circle mx-auto d-block" style="width: 150px;height: 150px;"
+                        src="{{ url_for('static', filename='images/' + user.profile_image) }}" alt="User Image">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ user.username }}</h4>
+                        <div class="d-grid gap-2">
+                            <a href="/swap" class="btn btn-lg" style="background-color: rgb(255,196,165);">Pending
+                                swap</a>
+                            <a href="/users/edit" class="btn btn-lg mt-2"
+                                style="background-color: rgb(151,213,255);">Edit Profile</a>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-sm-8 p-3">
                 <div class="d-flex justify-content-between">
                     <h5>My Games</h5>
-                    <h5><a href="/game/add">Add Game</a></h5>
+                    <h5><a href="/game/add" class="btn btn-lg mt-2" style="background-color: rgb(151,213,255);">Add
+                            Game</a></h5>
                 </div>
                 <div class="border border-dark mygame p-3">
                     <table class="table ">
@@ -107,10 +111,12 @@
                                 <td class="align-middle">{{game.state}}</td>
                                 <td class="align-middle">
                                     <a href="/game/edit/{{game.id}}">
-                                        <button type="button" class="btn btn-primary">Edit</button>
+                                        <button type="button" class="btn"
+                                            style="background-color: rgb(255,196,165);">Edit</button>
                                     </a>
                                     <a href="/delete/{{game.id}}">
-                                        <button class="btn btn btn-danger" type="submit" formaction="">Delete</button>
+                                        <button class="btn " style="background-color: rgb(151,213,255);" type="submit"
+                                            formaction="">Delete</button>
                                     </a>
                                 </td>
                             </tr>
@@ -120,7 +126,7 @@
                 </div>
                 <div class="m-5"></div>
                 <div class="d-flex justify-content-between">
-                    <h5><a href="/swap">My Swaps</a></h5>
+                    <h5><a href="/swap" class="btn btn-lg" style="background-color: rgb(255,196,165);">My Swaps</a></h5>
 
                 </div>
                 <div class="border border-dark p-3 myswap">
