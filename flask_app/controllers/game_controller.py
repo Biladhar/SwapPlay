@@ -9,13 +9,13 @@ import os
 
 
 
-# * View Route
+# ***** View Route *************
 @app.route("/marketplace")
 def marketplace():
     games = Game.get_all_games()
     return render_template("marketplace.html" ,games = games)
 
-UPLOAD_FOLDER = "C:/Users/sarsar/Desktop/SwapPlay/flask_app/static/images"
+UPLOAD_FOLDER = "C:/Users/kbeno/Desktop/py_project/SwapPlay/flask_app/static/images"
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -23,9 +23,11 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+# ********** ADD GAME *************************
+
 @app.route("/game/add", methods=["GET","POST"])
 def new_game():
-
         if request.method == 'POST':
         # check if the post request has the file part
             if 'file' not in request.files:
@@ -97,6 +99,7 @@ def edit_one_game(id):
 #         Game.add(data)
 #         return redirect("/dashboard")
 
+
 @app.route("/marketplace/show_games")
 def show_all():
     if "user_id" not in session:
@@ -115,12 +118,16 @@ def show_state():
     data = {
         "id" : session["user_id"]
     }
-    
     user = User.get_by_id(data)
-    state_games = Game.get_all_state({"state" : request.form["state"]})
+    # words = {
+    #     **request.form,
+    #     "name" : str("%" +request.form["name"]+ "%")
+    # }
+
+    state_games = Game.get_all_state(request.form)
     return render_template("marketplace_state.html", state_games=state_games,user=user)
 
-# * make offer
+# ***********  make offer *******************
 @app.route("/game/offer/<int:id>")
 def offer(id):
     if "user_id" not in session:
@@ -158,11 +165,18 @@ def pending_swap():
     
     return render_template("swap.html",swaps =all_swaps, user = user)
 
-
+# ! DELETE GAME  
 @app.route("/delete/<int:id>")
-def delete_game_(id):
+def delete_a_game(id):
     data={
         "id" : id
     }
-    Game.delete_game_user(data)
-    return redirect("/dashboard")
+    Swap.delete_game_with_swap(data)
+    Game.delete_game(data)
+    if "user_id" in session:
+        user_data = {"id": session["user_id"]}
+        user = User.get_by_id(user_data)
+        if user.role == "admin":
+            return redirect("/dashboard/admin")
+        else:
+            return redirect("/dashboard")

@@ -62,27 +62,20 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
             <div class="container">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Game" aria-label="Search">
-                    </form>
-                    <div class="dropdown ms-4">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Platform
-                        </button>
-
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="/marketplace/show_by_platform"
-                                    value="playStation 4">PlayStation 4</a></li>
-                            <li><a class="dropdown-item" href="/marketplace/show_by_platform" value="switch">Switch</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <form action="/marketplace/show_by_state" method="post">
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <form action="/marketplace/show_by_state" method="POST">
                         <div class="d-flex justify-content-between ms-4">
+                            <input class="form-control me-2" name="name" type="search" placeholder="Game"
+                                aria-label="Search">
+                            <select name="platform" class="form-select btn btn-outline-secondary">
+                                <option value="any">Platform</option>
+                                <option value="Playstation 4">Playstation 4</option>
+                                <option value="Playstation 5">Playstation 5</option>
+                                <option value="x-box">x-box</option>
+                                <option value="PC">PC</option>
+                            </select>
                             <select name="state" class="form-select btn btn-outline-secondary">
-                                <option>State</option>
+                                <option value="any">State</option>
                                 <option value="full">Full</option>
                                 <option value="with box , no documents">With Box , No documents</option>
                                 <option value="only game ">Only game </option>
@@ -117,10 +110,16 @@
                                     <th class="col-sm-2">{{game.name}}</th>
                                     <th class="col-sm-2">{{game.state}}</th>
                                     <th class="col-sm-2">{{game.platform}}</th>
-                                    <th class="col-sm-2">{{user.username}}</th>
-                                    <th class="col-sm-2">SCORE***NOTDONE</th>
+                                    <th class="col-sm-2">{{game.posted_by.username}}</th>
+
                                     <th class="col-md-2">
-                                        <button class=" btn btn-outline-success">Make Offer</button>
+                                        {% if user.id == game.user_id %}
+                                        <button class="btn btn-outline-danger" disabled>My Game</button>
+                                        {% else %}
+                                        <a href="/game/offer/{{game.id}}">
+                                            <button class=" btn btn-outline-success">Make Offer</button>
+                                        </a>
+                                        {% endif %}
                                     </th>
                                 </tr>
                             </tbody>
